@@ -1,0 +1,90 @@
+version: "2"
+
+volumes:
+  orderer.auto.com:
+  peer0.manufacturer.auto.com:
+  peer0.dealer.auto.com:
+  peer0.mvd.auto.com:
+
+networks:
+  automobile:
+
+services:
+  orderer.auto.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: orderer.auto.com
+    container_name: orderer.auto.com
+    networks:
+      - automobile
+
+  peer0.manufacturer.auto.com:
+    container_name: peer0.manufacturer.auto.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: peer0.manufacturer.auto.com
+    networks:
+      - automobile
+
+  peer0.dealer.auto.com:
+    container_name: peer0.dealer.auto.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: peer0.dealer.auto.com
+    networks:
+      - automobile
+
+  peer0.mvd.auto.com:
+    container_name: peer0.mvd.auto.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: peer0.mvd.auto.com
+    networks:
+      - automobile
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      #- FABRIC_LOGGING_SPEC=DEBUG
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.manufacturer.auto.com:7051
+      - CORE_PEER_LOCALMSPID=ManufacturerMSP
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturer.auto.com/users/Admin@manufacturer.auto.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./../gopath/src/chaincode_example02/:/opt/gopath/src/github.com/chaincode
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+      - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+      - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    depends_on:
+      - orderer.auto.com
+      - peer0.manufacturer.auto.com
+      - peer0.dealer.auto.com
+      - peer0.mvd.auto.com
+    networks:
+      - automobile
+
+  ca.manufacturer.com:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.manufacturer.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.manufacturer.auto.com-cert
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/60eb99c49154b2e83d9ec1179c943a916b717be1ea43f7a6cd76dff4a3740fc5_sk
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start'
+    volumes:
+      - ./crypto-config/peerOrganizations/manufacturer.auto.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.manufacturer.com
+    networks:
+      - automobile

@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "KeyVault",
+  "description": "sample wallet",
+  "version": "2.0",
+  "browser_action": {
+    "default_icon": "lock.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "keys/*",
+    "yaml/*",
+    "json/*",
+    "lib/*",
+    "proto/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.12/jsrsasign-all-min.js https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.13.1/js-yaml.js https://cdn.rawgit.com/dcodeIO/protobuf.js/6.8.8/dist/protobuf.min.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:3000/*"
+      ],
+      "js": [
+        "./js/extlib/jquery-3.4.1.min.js",
+        "./js/lib/proto.min.js",
+        "./js/src/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./js/src/background.js",
+      "./js/lib/proto.min.js"
+    ]
+  }
+}

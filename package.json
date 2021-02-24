@@ -1,0 +1,29 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "A sample library for offline key signature",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sethu Raman O",
+  "license": "ISC",
+  "dependencies": {
+    "asn1.js": "^5.2.0",
+    "crypto": "^1.0.1",
+    "elliptic": "^6.5.2",
+    "fabric-ca-client": "^1.4.4",
+    "fabric-client": "^1.4.5",
+    "fabric-common": "^1.4.4",
+    "grpc": "^1.24.1",
+    "jsrsasign": "^8.0.12",
+    "key-encoder": "^2.0.3",
+    "tape": "^4.12.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-generator": "^4.16.1",
+    "yaml-js": "^0.2.3",
+    "tape-promise": "^4.0.0"
+  }
+}

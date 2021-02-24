@@ -1,0 +1,39 @@
+# Defines four organizations
+#  - Orderer organization
+#  - Acme
+#  - Budget
+#  - Expo
+##### Orderer for acme
+OrdererOrgs:
+  - Name: Orderer
+    Domain: auto.com
+    EnableNodeOUs: true #enable Organisational units
+    Specs:
+      - Hostname: orderer
+
+#### Peers for acme
+PeerOrgs:
+  # Peer configuration for ACME
+  - Name: Manufacturer
+    Domain: manufacturer.auto.com
+    EnableNodeOUs: true
+    Template: #number of peers
+      Count: 1
+    Users:
+      Count: 1 #number of users
+
+  - Name: Dealer
+    Domain: dealer.auto.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: MVD
+    Domain: mvd.auto.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1

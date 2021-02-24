@@ -1,0 +1,27 @@
+import "google/protobuf/any.proto";
+package fabricMessage;
+syntax = "proto3";
+
+message proposal {
+    bytes proposalBuf =1;
+
+}
+
+message payload{
+    repeated string payload = 1; 
+}
+
+message signedProposal {
+    bytes signature =1;
+    bytes proposalBytes=2;
+
+}
+
+message commitProposal {
+    bytes commitBuf =1;
+}
+
+message  signedCommitProposal {
+    bytes signedCommitBuf =1;
+    
+}

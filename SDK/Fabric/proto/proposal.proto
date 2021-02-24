@@ -1,0 +1,22 @@
+import "google/protobuf/any.proto";
+package fabricMessage;
+syntax = "proto3";
+
+message proposal {
+    google.protobuf.Any proposalBuf =1;
+
+}
+
+message signedProposal {
+    google.protobuf.Any signedProposalBuf =1;
+
+}
+
+message commitProposal {
+    google.protobuf.Any commitBuf =1;
+}
+
+message  signedCommitProposal {
+    google.protobuf.Any signedCommitBuf =1;
+    
+}

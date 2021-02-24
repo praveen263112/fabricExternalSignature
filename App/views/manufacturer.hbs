@@ -1,0 +1,59 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/javascripts/Fabric/dist/proto.min.js"></script>
+
+<link rel='stylesheet' href='/stylesheets/dashboards.css' />
+<h1>Manufacturer Dashboard</h1>
+<div class="form-modal">
+
+    <div id="man-form">
+        <h3>Add New Car</h3>
+        <form id="manform">
+            {{!-- <table>
+                        <tr>
+                            <td><input id="VinNumbMan" type="text" placeholder="Enter Vin Number"/></td>
+                            <td><input id="carMake" type="text" placeholder="Make"/></td>
+                        </tr>
+                        <tr>
+                            <td><input id="model" type="text" placeholder="Model"/></td>
+                            <td><input id="color" type="text" placeholder="Color"/></td>
+                        
+                        </tr>
+                        <tr>
+
+                            <td><input id="dom" type="text" onfocus="(this.type='date')" placeholder="Date of Manufacture"/></td>
+                            <td><input id="flag" type="text" placeholder="Flag"/></td>
+                        </tr>
+            </table> --}}
+            <button type="button" onclick="ManWriteData(event)" class="btn login">Add New Vehicle</button>
+
+        </form>
+
+    </div>
+
+    {{!-- <div class="form-modal">
+
+        <div id="man-form">
+            <h3>Query Car</h3>
+            <form id="manform">
+                <table>
+
+                    <input id="QueryVinNumbMan" type="text" placeholder="Enter Vin Number" />
+
+                </table>
+                <button type="button" onclick="ManQueryData(event)" class="btn login">Query Car</button>
+
+            </form>
+
+        </div>
+
+
+        <br>
+
+        <a class="nav-link" id="list" href="/listVehicles">
+            <h3>Car Inventory Details</h3>
+        </a>
+
+    </div> --}}
+    <script src="/javascripts/signer.js"></script>
+    <script src='/javascripts/main.js'></script>

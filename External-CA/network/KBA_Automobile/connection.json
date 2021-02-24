@@ -1,0 +1,71 @@
+{
+  "name": "KBA_automobile",
+  "description": "Automobile network",
+  "version": "1.0",
+  "organizations": {
+    "Manufacturer": {
+      "mspid": "ManufacturerMSP",
+      "peers": [
+        "peer0.manufacturer.auto.com"
+      ]
+    },
+    "Dealer": {
+      "mspid": "DealerMSP",
+      "peers": [
+        "peer0.dealer.auto.com"
+      ]
+    },
+    "Mvd": {
+      "mspid": "MvdMSP",
+      "peers": [
+        "peer0.mvd.auto.com"
+      ]
+    }
+  },
+  "channels": {
+    "autochannel": {
+      "orderers": [
+        "orderer.auto.com"
+      ],
+      "peers": {
+        "peer0.manufacturer.auto.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer0.dealer.auto.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer0.mvd.auto.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+      }
+    }
+  },
+  "orderers": {
+    "orderer.auto.com": {
+      "url": "grpc://localhost:7050",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer.auto.com"
+      }
+    }
+  },
+  "peers": {
+    "peer0.manufacturer.auto.com": {
+      "url": "grpc://127.0.0.1:7051"
+    },
+    "peer0.dealer.auto.com": {
+      "url": "grpc://localhost:8051"
+    },
+    "peer0.mvd.auto.com": {
+      "url": "grpc://localhost:9051"
+    }
+  }
+}
